@@ -1,0 +1,50 @@
+youtube:
+  channel_id: "UC23rnlQU_qE3cec9x709peA"
+
+whisper:
+  model_size: "auto"  # auto | large-v3 | medium | small
+  language: "zh"
+  initial_prompt: "以下是繁體中文的內容。"
+
+analyzer:
+  model: "grok-4-1-fast-non-reasoning"
+  max_chunk_tokens: 8000
+  prompt_template: |
+    你是一位專業的財經 Podcast 分析師。請分析以下「股癌」Podcast 的逐字稿內容，
+    提供結構化的重點摘要。
+
+    請包含以下內容：
+    1. 本集主題概述（2-3 句）
+    2. 主要觀點與論述（條列式，5-8 點）
+    3. 提到的市場/產業/個股（如有）
+    4. 投資觀念或策略重點
+    5. 值得關注的警示或風險提醒（如有）
+
+    逐字稿內容：
+    {transcript}
+  qa_markers:
+    - "進入Q"
+    - "Q&A"
+    - "QA"
+    - "提問"
+    - "聽眾問題"
+    - "來看一下問題"
+    - "觀眾提問"
+    - "問答時間"
+    - "來看問題"
+  qa_min_position: 0.4
+
+data:
+  max_keep_episodes: 20
+
+bot:
+  cooldown_seconds: 600
+
+scheduler:
+  trigger_days:
+    - wed
+    - sat
+  # 週三/六 下午1點後每2小時: 13,15,17,19,21,23
+  timezone: "Asia/Taipei"
+  misfire_grace_time: 3600  # seconds
+  lookback_days: 4          # 只處理 N 天內發布的集數（涵蓋週三到週六間隔）

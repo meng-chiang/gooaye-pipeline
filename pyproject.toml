@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "gooaye"
+version = "0.1.0"
+description = "Gooaye 股癌 Podcast 自動分析 Pipeline"
+authors = []
+packages = [{ include = "gooaye", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+yt-dlp = "*"
+faster-whisper = "*"
+opencc-python-reimplemented = "*"
+openai = "*"
+python-telegram-bot = { version = "*", extras = ["job-queue"] }
+apscheduler = "*"
+pydantic-settings = "*"
+pyyaml = "*"
+structlog = "*"
+httpx = "*"
+tiktoken = "*"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+pytest-asyncio = "*"
+pytest-mock = "*"
+
+[tool.poetry.scripts]
+gooaye = "gooaye.main:cli"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
